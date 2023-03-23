@@ -13,6 +13,8 @@ public class PalindromeTester
      */
    public static void main (String[] args)
    {
+         
+   {
       String str, another = "y";
       int left, right;
       Scanner s = new Scanner(System.in);
@@ -21,27 +23,44 @@ public class PalindromeTester
       {
          System.out.println ("Enter a potential palindrome:");
          str = s.nextLine();
-
-         left = 0;
-         right = str.length() - 1;
-
-         while (str.charAt(left) == str.charAt(right) && left < right)
-         {
-            left++;
-            right--;
-         }
-
+         
+        
          System.out.println();
-
-         if (left < right)
-            System.out.println ("That string is NOT a palindrome.");
-         else
-            System.out.println ("That string IS a palindrome.");
+         if(isPalindrome(str)){
+             System.out.println("This String is a palindrome");
+         }
+         else{
+             System.out.println("This string is a not a palindrome");
+         }
+    
 
          System.out.println();
          System.out.print ("Test another palindrome (y/n)? ");
          another = s.nextLine();
       }
       while (another.equalsIgnoreCase("y")); // allows y or Y
+
+    }}
+    
+    
+   public static boolean isPalindrome(String str){
+       if(str.length() <=1){
+           return true;
+       }
+       str = str.replace(",", "").replace("!", "").replace(" ", "").toLowerCase();
+       System.out.println(str);
+       String firstChar = str.substring(0,1);
+       String lastChar = str.substring(str.length()-1);
+       
+       if(firstChar.equals(lastChar)){
+           return isPalindrome(str.substring(1,str.length()-1));
+       }
+       else{
+           return false; 
+       }
    }
+    
 }
+    
+    
+    
