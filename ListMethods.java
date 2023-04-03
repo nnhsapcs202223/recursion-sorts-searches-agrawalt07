@@ -19,10 +19,9 @@ public class ListMethods
         }
         else        // All other size lists are created here
         {
-
             tempList = makeList(n-1); 
-            tempList.add(n);
         }
+        tempList.add(n);
         return tempList;
     }
 
