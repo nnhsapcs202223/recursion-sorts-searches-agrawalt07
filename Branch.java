@@ -8,14 +8,11 @@ import java.awt.MouseInfo;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Branch extends JFrame 
+public class Branch extends JComponent
 {
-    public Branch()
-    {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        this.setResizable(false);
-    }
-    public void drawFractalTree(int x, int y, double a, Graphics2D g2, int h, int t){
+    private int angle;
+    
+    public void drawFractalTree(int x, int y, double a, Graphics2D g2, int h, int t, int i){
         if(h==0){
             g2.setColor(Color.GREEN); 
             g2.fillOval(x-2,y,5,5);
@@ -27,30 +24,21 @@ public class Branch extends JFrame
         g2.setStroke(new BasicStroke(t));
         g2.setColor(new Color(102,51,0));
         g2.drawLine(x,y,x2,y2); 
-        drawFractalTree(x2,y2,a-30,g2, h-1, t-1);
-        drawFractalTree(x2,y2,a+30,g2, h-1, t-1);
+        drawFractalTree(x2,y2,a-i,g2, h-1, t-1, i);
+        drawFractalTree(x2,y2,a+i,g2, h-1, t-1, i);
     }
-    //Taken from stackOverflow
-    static double map(double value, double start1, double stop1, double start2, double stop2) {
-        return (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+    
+    public void setAngle(int a)
+    {
+        angle = a;
     }
-
-    
-    
-    
-    
     
     @Override
-    public void paint(Graphics g)
+    public void paintComponent(Graphics g)
     {
-        Graphics2D g2 = (Graphics2D) g; 
-        this.drawFractalTree(400,700, -90, g2, 10, 11); 
+        Graphics2D g2 = (Graphics2D) g;
+        drawFractalTree(400,700, -90, g2, 10, 11, angle);
     }
-    public static void run(){
-        Branch tree = new Branch(); 
-        tree.setSize(1000,800);
-        tree.setVisible(true); 
-        tree.setTitle("Fractal Tree"); 
-        tree.setBackground(Color.BLACK);
-    }
+
+
 }
